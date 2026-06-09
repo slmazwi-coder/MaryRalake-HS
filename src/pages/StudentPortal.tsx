@@ -18,7 +18,7 @@ export const StudentPortal = () => {
   const navigate = useNavigate();
 
   const studentNumber = useMemo(() => {
-    return sessionStorage.getItem('colana_student_portal_student_number') || '';
+    return sessionStorage.getItem('mary-ralake_student_portal_student_number') || '';
   }, []);
 
   const [search, setSearch] = useState('');
@@ -35,13 +35,13 @@ export const StudentPortal = () => {
   }, [docs, search]);
 
   const logout = () => {
-    sessionStorage.removeItem('colana_student_portal_student_number');
+    sessionStorage.removeItem('mary-ralake_student_portal_student_number');
     navigate('/student/login');
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-[#DAA520] text-white">
+      <div className="bg-[#CC1A2A] text-white">
         <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between gap-4">
           <div>
             <div className="text-sm text-white/80">Student Portal</div>
@@ -65,7 +65,7 @@ export const StudentPortal = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search documents..."
-              className="w-full bg-white border border-gray-200 rounded-xl pl-9 pr-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#DAA520]/20"
+              className="w-full bg-white border border-gray-200 rounded-xl pl-9 pr-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#CC1A2A]/20"
             />
           </div>
         </div>

@@ -41,7 +41,7 @@ const StudentAvatar = ({ image, name, year }: { image: string; name: string; yea
           <p className="text-xs text-gray-400 italic">Class of {year}</p>
         </div>
       )}
-      <div className="absolute top-0 right-0 bg-[#FDF5E6] p-4 text-[#6B2D15] opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute top-0 right-0 bg-[#FDF5E6] p-4 text-[#1A3A8F] opacity-0 group-hover:opacity-100 transition-opacity">
         <Award size={24} />
       </div>
     </div>
@@ -79,19 +79,19 @@ export const Achievements = () => {
         <h1 className="section-title text-center mb-12 sm:mb-16">Academic Excellence</h1>
 
         <section className="mb-16 sm:mb-24">
-          <div className="bg-[#6B2D15] border-2 border-[#DAA520] rounded-3xl p-6 sm:p-8 md:p-12 relative overflow-hidden shadow-xl">
+          <div className="bg-[#1A3A8F] border-2 border-[#CC1A2A] rounded-3xl p-6 sm:p-8 md:p-12 relative overflow-hidden shadow-xl">
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-              <Star size={200} className="text-[#6B2D15]" />
+              <Star size={200} className="text-[#1A3A8F]" />
             </div>
             <div className="relative z-10 text-center">
-              <div className="flex flex-wrap items-center justify-center gap-2 text-[#DAA520] font-bold uppercase tracking-widest text-sm mb-4">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-[#CC1A2A] font-bold uppercase tracking-widest text-sm mb-4">
                 <Star size={16} fill="currentColor" /> Matric Results <Star size={16} fill="currentColor" />
               </div>
-              <h2 className="text-3xl md:text-5xl font-black text-[#DAA520] mb-4">
+              <h2 className="text-3xl md:text-5xl font-black text-[#CC1A2A] mb-4">
                 Results Coming Soon
               </h2>
               <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto italic leading-relaxed">
-                "Colana SSS is committed to academic improvement and celebrating every learner's progress. Matric results will be published once available."
+                "Mary Ralake HS SSS is committed to academic improvement and celebrating every learner's progress. Matric results will be published once available."
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export const Achievements = () => {
 
         <section className="mb-20 sm:mb-32">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-3xl font-bold text-[#6B2D15]">Year-by-Year Results</h2>
+            <h2 className="text-3xl font-bold text-[#1A3A8F]">Year-by-Year Results</h2>
             <p className="text-gray-500 mt-2">Select a year to view results (data will be updated as it becomes available)</p>
           </div>
 
@@ -111,7 +111,7 @@ export const Achievements = () => {
                 className="px-6 py-2.5 rounded-full text-sm font-bold transition-all"
                 style={
                   activeResultsYear === y
-                    ? { background: '#DAA520', color: '#fff', boxShadow: '0 4px 12px rgba(218,165,32,0.35)' }
+                    ? { background: '#CC1A2A', color: '#fff', boxShadow: '0 4px 12px rgba(218,165,32,0.35)' }
                     : { background: '#f3f4f6', color: '#6b7280' }
                 }
               >
@@ -129,8 +129,8 @@ export const Achievements = () => {
                 { icon: BarChart3, label: 'Candidates', value: String(currentResults.wrote) },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="bg-gray-50 rounded-2xl p-6 text-center border border-gray-100">
-                  <Icon size={28} className="mx-auto mb-3 text-[#DAA520]" />
-                  <p className="text-2xl font-black text-[#6B2D15]">{value}</p>
+                  <Icon size={28} className="mx-auto mb-3 text-[#CC1A2A]" />
+                  <p className="text-2xl font-black text-[#1A3A8F]">{value}</p>
                   <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">{label}</p>
                 </div>
               ))}
@@ -145,7 +145,7 @@ export const Achievements = () => {
 
         <section>
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-[#6B2D15]">Hall of Fame</h2>
+            <h2 className="text-3xl font-bold text-[#1A3A8F]">Hall of Fame</h2>
             <p className="text-gray-500 mt-2">Celebrating our top achievers</p>
           </div>
 
@@ -159,7 +159,7 @@ export const Achievements = () => {
                     className="px-5 py-2 rounded-full text-sm font-bold transition-all"
                     style={
                       activeAchieversYear === y
-                        ? { background: '#DAA520', color: '#fff' }
+                        ? { background: '#CC1A2A', color: '#fff' }
                         : { background: '#f3f4f6', color: '#6b7280' }
                     }
                   >
@@ -172,8 +172,8 @@ export const Achievements = () => {
                 {(achieversByYear[activeAchieversYear] || []).map((entry) => (
                   <div key={entry.id} className="text-center">
                     <StudentAvatar image={entry.image} name={entry.name} year={entry.year} />
-                    <h3 className="mt-4 font-bold text-[#6B2D15]">{entry.name}</h3>
-                    <p className="text-sm text-[#DAA520] font-semibold">{entry.title}</p>
+                    <h3 className="mt-4 font-bold text-[#1A3A8F]">{entry.name}</h3>
+                    <p className="text-sm text-[#CC1A2A] font-semibold">{entry.title}</p>
                     {entry.desc && <p className="text-xs text-gray-500 mt-1">{entry.desc}</p>}
                   </div>
                 ))}

@@ -10,14 +10,17 @@ export default function NewsSection() {
   if (!news.length) return null
 
   return (
-    <section className="section-pad" style={{ background: '#FFFDF5' }}>
+    <section className="section-pad" style={{ background: '#FFFFFF' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="flex items-end justify-between mb-10 gap-4 flex-wrap">
           <div>
-            <div className="gold-bar" />
+            <div className="blue-bar" />
             <h2 className="section-title">News & Notices</h2>
           </div>
+          <Link to="/news" className="text-sm font-semibold flex items-center gap-1" style={{ color: '#1A3A8F' }}>
+            View all news <ArrowRight size={14} />
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -29,20 +32,20 @@ export default function NewsSection() {
               )}
               <div className="flex items-center gap-3 mb-3">
                 <span className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
-                  style={{ background: 'rgba(218,165,32,0.12)', color: '#B8860B' }}>
+                  style={{ background: 'rgba(26,58,143,0.1)', color: '#1A3A8F' }}>
                   <Tag size={11} /> {item.category}
                 </span>
                 <span className="flex items-center gap-1 text-xs" style={{ color: '#6b7280' }}>
                   <Calendar size={11} /> {item.date}
                 </span>
               </div>
-              <h3 className="font-display font-bold text-lg mb-2 leading-tight" style={{ color: '#6B2D15' }}>
+              <h3 className="font-display font-bold text-lg mb-2 leading-tight" style={{ color: '#1A3A8F' }}>
                 {item.title}
               </h3>
               <p className="text-sm flex-1 mb-4" style={{ color: '#374151' }}>
                 {item.excerpt}
               </p>
-              <span className="text-sm font-semibold flex items-center gap-1" style={{ color: '#DAA520' }}>
+              <span className="text-sm font-semibold flex items-center gap-1" style={{ color: '#CC1A2A' }}>
                 Read more <ArrowRight size={14} />
               </span>
             </article>

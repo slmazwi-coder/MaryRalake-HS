@@ -17,16 +17,16 @@ const ProgramCard: React.FC<{ prog: Activity & { icon: React.FC<{ size?: number;
     className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group"
   >
     <div className="aspect-video bg-[#FDF5E6] flex items-center justify-center relative">
-      <prog.icon size={64} className="text-[#6B2D15]/40" />
-      <div className="absolute inset-0 bg-[#DAA520] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <prog.icon size={64} className="text-[#1A3A8F]/40" />
+      <div className="absolute inset-0 bg-[#CC1A2A] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <prog.icon size={48} className="text-white" />
       </div>
     </div>
     <div className="p-6">
       <div className="flex items-center gap-2 mb-2">
         <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-          prog.category === 'Sport' ? 'bg-[#FFF3CC] text-[#6B2D15]' :
-          prog.category === 'Academic' ? 'bg-[#FDF5E6] text-[#6B2D15]' :
+          prog.category === 'Sport' ? 'bg-[#FFF3CC] text-[#1A3A8F]' :
+          prog.category === 'Academic' ? 'bg-[#FDF5E6] text-[#1A3A8F]' :
           'bg-orange-100 text-orange-700'
         }`}>{prog.category}</span>
       </div>
@@ -65,13 +65,13 @@ export const ExtraCurricular = () => {
         <h1 className="section-title text-center">Sports & Culture</h1>
 
         <p className="text-center text-xl text-gray-600 mb-16 max-w-3xl mx-auto">
-          At Colana SSS, we believe in a holistic education. Our extra-curricular programs are designed to discover and nurture the diverse talents of our learners.
+          At Mary Ralake HS SSS, we believe in a holistic education. Our extra-curricular programs are designed to discover and nurture the diverse talents of our learners.
         </p>
 
         {sports.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-bold text-[#6B2D15] mb-8 flex items-center gap-3">
-              <Dumbbell className="text-[#6B2D15]" /> Sports
+            <h2 className="text-2xl font-bold text-[#1A3A8F] mb-8 flex items-center gap-3">
+              <Dumbbell className="text-[#1A3A8F]" /> Sports
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {sports.map(a => <ProgramCard key={a.id} prog={withIcon(a)} />)}
@@ -81,8 +81,8 @@ export const ExtraCurricular = () => {
 
         {academic.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-bold text-[#6B2D15] mb-8 flex items-center gap-3">
-              <BookOpen className="text-[#6B2D15]" /> Academic Programmes
+            <h2 className="text-2xl font-bold text-[#1A3A8F] mb-8 flex items-center gap-3">
+              <BookOpen className="text-[#1A3A8F]" /> Academic Programmes
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {academic.map(a => <ProgramCard key={a.id} prog={withIcon(a)} />)}
@@ -92,8 +92,8 @@ export const ExtraCurricular = () => {
 
         {culture.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-bold text-[#6B2D15] mb-8 flex items-center gap-3">
-              <Music className="text-[#6B2D15]" /> Arts & Culture
+            <h2 className="text-2xl font-bold text-[#1A3A8F] mb-8 flex items-center gap-3">
+              <Music className="text-[#1A3A8F]" /> Arts & Culture
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {culture.map(a => <ProgramCard key={a.id} prog={withIcon(a)} />)}

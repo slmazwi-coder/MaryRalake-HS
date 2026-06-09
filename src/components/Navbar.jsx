@@ -5,13 +5,13 @@ import { SCHOOL } from '../lib/store'
 
 const NAV_LINKS = [
   { label: 'Home',         to: '/' },
-  { label: 'About',        to: '/about' },
-  { label: 'Achievements', to: '/achievements' },
-  { label: 'Sport & Arts', to: '/activities' },
-  { label: 'Documents',    to: '/documents' },
-  { label: 'Staff',        to: '/staff' },
-  { label: 'Admissions',   to: '/admissions' },
-  { label: 'Contact',      to: '/contact' },
+  { label: 'About',       to: '/about' },
+  { label: 'Academics',    to: '/academics' },
+  { label: 'Facilities',   to: '/facilities' },
+  { label: 'Admissions',  to: '/admissions' },
+  { label: 'Gallery',     to: '/gallery' },
+  { label: 'News',        to: '/news' },
+  { label: 'Contact',     to: '/contact' },
 ]
 
 export default function Navbar() {
@@ -31,25 +31,26 @@ export default function Navbar() {
     <header
       className="sticky top-0 z-50 transition-shadow duration-300"
       style={{
-        background: '#6B2D15',
-        borderBottom: '3px solid #DAA520',
-        boxShadow: scrolled ? '0 4px 24px rgba(107,45,21,0.25)' : 'none',
+        background: '#FFFFFF',
+        borderBottom: '3px solid #1A3A8F',
+        boxShadow: scrolled ? '0 4px 24px rgba(26,58,143,0.15)' : 'none',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
           <Link to="/" className="flex items-center gap-3 group min-w-0">
-            <img
-              src="/assets/logo.png"
-              alt="Colana SSS Logo"
-              className="w-16 h-16 rounded-lg shrink-0 object-contain"
-            />
+            <div
+              className="w-14 h-14 rounded-lg shrink-0 flex items-center justify-center"
+              style={{ background: '#1A3A8F' }}
+            >
+              <span className="text-white font-bold text-xs">MR</span>
+            </div>
             <div className="min-w-0">
-              <p className="font-display text-base font-bold leading-tight truncate" style={{ color: '#DAA520' }}>
-                {SCHOOL.short}
+              <p className="font-display text-base font-bold leading-tight truncate" style={{ color: '#1A3A8F' }}>
+                MARY RALAKE HIGH SCHOOL
               </p>
-              <p className="text-xs leading-tight mt-0.5" style={{ color: 'rgba(218,165,32,0.65)' }}>
+              <p className="text-xs leading-tight mt-0.5" style={{ color: 'rgba(26,58,143,0.65)' }}>
                 {SCHOOL.motto}
               </p>
             </div>
@@ -63,11 +64,11 @@ export default function Navbar() {
                 className="px-3 py-1.5 rounded-md text-sm font-medium transition-colors duration-150"
                 style={
                   pathname === to
-                    ? { background: '#DAA520', color: '#6B2D15', fontWeight: 700 }
-                    : { color: 'rgba(218,165,32,0.85)' }
+                    ? { background: '#1A3A8F', color: '#FFFFFF', fontWeight: 700 }
+                    : { color: 'rgba(26,58,143,0.85)' }
                 }
                 onMouseEnter={e => {
-                  if (pathname !== to) e.currentTarget.style.background = 'rgba(218,165,32,0.12)'
+                  if (pathname !== to) e.currentTarget.style.background = 'rgba(26,58,143,0.08)'
                 }}
                 onMouseLeave={e => {
                   if (pathname !== to) e.currentTarget.style.background = ''
@@ -82,15 +83,15 @@ export default function Navbar() {
             <Link
               to="/student/login"
               className="hidden sm:inline-flex text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors"
-              style={{ borderColor: '#DAA520', color: '#DAA520' }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#DAA520'; e.currentTarget.style.color = '#6B2D15' }}
-              onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.color = '#DAA520' }}
+              style={{ borderColor: '#1A3A8F', color: '#1A3A8F' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#1A3A8F'; e.currentTarget.style.color = '#FFFFFF' }}
+              onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.color = '#1A3A8F' }}
             >
               Student Portal
             </Link>
             <button
               className="lg:hidden p-2 rounded-lg"
-              style={{ color: '#DAA520' }}
+              style={{ color: '#1A3A8F' }}
               onClick={() => setOpen(v => !v)}
               aria-label="Toggle menu"
             >
@@ -101,7 +102,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div style={{ background: '#4A1E0D', borderTop: '1px solid rgba(218,165,32,0.2)' }}>
+        <div style={{ background: '#E8EDFB', borderTop: '1px solid rgba(26,58,143,0.2)' }}>
           <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
             {NAV_LINKS.map(({ label, to }) => (
               <Link
@@ -110,8 +111,8 @@ export default function Navbar() {
                 className="px-4 py-2.5 rounded-lg text-sm font-medium"
                 style={
                   pathname === to
-                    ? { background: '#DAA520', color: '#6B2D15', fontWeight: 700 }
-                    : { color: 'rgba(218,165,32,0.85)' }
+                    ? { background: '#1A3A8F', color: '#FFFFFF', fontWeight: 700 }
+                    : { color: 'rgba(26,58,143,0.85)' }
                 }
               >
                 {label}
@@ -120,7 +121,7 @@ export default function Navbar() {
             <Link
               to="/student/login"
               className="px-4 py-2.5 rounded-lg text-sm font-medium mt-1"
-              style={{ color: '#DAA520', borderTop: '1px solid rgba(218,165,32,0.15)', paddingTop: '0.75rem' }}
+              style={{ color: '#1A3A8F', borderTop: '1px solid rgba(26,58,143,0.15)', paddingTop: '0.75rem' }}
             >
               Student Portal
             </Link>

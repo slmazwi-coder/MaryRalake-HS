@@ -14,6 +14,10 @@ import { Admissions } from './pages/Admissions'
 import { Contact } from './pages/Contact'
 import { StudentLogin } from './pages/StudentLogin'
 import { StudentPortal } from './pages/StudentPortal'
+import Academics from './pages/Academics'
+import Facilities from './pages/Facilities'
+import Gallery from './pages/Gallery'
+import News from './pages/News'
 
 export default function App() {
   return (
@@ -23,6 +27,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/academics" element={<Academics />} />
+          <Route path="/facilities" element={<Facilities />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/news" element={<News />} />
           <Route path="/staff" element={<Staff />} />
           <Route path="/documents" element={<Documents />} />
           <Route path="/achievements" element={<Achievements />} />

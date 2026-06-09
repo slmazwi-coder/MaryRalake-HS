@@ -57,7 +57,7 @@ export const Documents = () => {
                   className={cn(
                     "px-6 py-2 rounded-full font-semibold transition-all",
                     selectedGrade === grade
-                      ? "bg-[#DAA520] text-white shadow-lg"
+                      ? "bg-[#CC1A2A] text-white shadow-lg"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   )}
                 >
@@ -70,7 +70,7 @@ export const Documents = () => {
               <input
                 type="text"
                 placeholder="Search documents..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#DAA520]/20"
+                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#CC1A2A]/20"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -89,7 +89,7 @@ export const Documents = () => {
                 className="card group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-[#FDF5E6] text-[#6B2D15] rounded-xl group-hover:bg-[#B8860B] group-hover:text-white transition-colors">
+                  <div className="p-3 bg-[#FDF5E6] text-[#1A3A8F] rounded-xl group-hover:bg-[#102060] group-hover:text-white transition-colors">
                     <FileText size={24} />
                   </div>
                   <div className="flex-grow">
@@ -97,7 +97,7 @@ export const Documents = () => {
                     <p className="text-sm text-gray-500 mb-4">Resource &bull; {doc.grade}</p>
                     <button
                       onClick={() => handleDownload(doc)}
-                      className="flex items-center gap-2 text-[#6B2D15] font-bold hover:underline"
+                      className="flex items-center gap-2 text-[#1A3A8F] font-bold hover:underline"
                     >
                       <Download size={16} /> Download
                     </button>

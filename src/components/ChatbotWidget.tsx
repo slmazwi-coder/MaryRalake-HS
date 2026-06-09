@@ -1,62 +1,104 @@
 import { useState, useRef, useEffect } from 'react'
-import { MessageCircle, X, Send, Sparkles } from 'lucide-react'
-import { getApplications } from '../lib/store'
+import { MessageCircle, X, Send, GraduationCap } from 'lucide-react'
 
-const SYSTEM = `You are a helpful, warm assistant for Colana Senior Secondary School in the Eastern Cape, South Africa.
-
-School facts:
-- Phone: 078 671 7415
-- Email: onkenoleen@gmail.com
-- Address: Colana, Eastern Cape, South Africa
-- Grades 8–12, public school
-- Motto: Vuka Ulwe Uqaqambe (Rise Up and Progress)
-- Three streams: General (Languages, Tourism, History, Geography, Maths Literacy, L.O), Science (Languages, L.O, Maths, Physics, Life Sciences, Geo/Agriculture), Commerce (Languages, L.O, Accounting, Business Studies, Economics, Maths/Maths Lit)
-- 2027 admission applications currently open
-- School hours: Mon–Thu 07:30–15:30, Fri 07:30–13:30
-- Sports: Soccer, Netball, Athletics
-- Activities: Debating, Spelling Bee, Choir, Drama
-
-Be concise, warm and helpful. If unsure, direct them to call the school.`
+// Chatbot responses for Mary Ralake High School
+const CHATBOT_RESPONSES = {
+  greetings: [
+    "Hi there! I'm the Mary Ralake High School assistant. Ask me anything about admissions, academics, the Tie Ceremony, school life, or how to contact us!",
+  ],
+  admissions: {
+    apply: "Applications are handled directly at the school. Visit us in Maluti, Matatiele, Eastern Cape, 4730, or find us on Facebook: Mary Ralake high School. You'll need your latest school report, birth certificate, and a parent/guardian ID.",
+    fee: "Mary Ralake High School is a no-fee public school — there are no tuition fees charged to learners.",
+    grades: "We offer Grades 8 through 12.",
+    documents: "For admission, you'll typically need: birth certificate or ID, latest school report, parent/guardian ID copy, and proof of residence.",
+  },
+  academics: {
+    subjects: "We offer the full CAPS/NSC curriculum including Mathematics, English, Life Sciences, Physical Sciences, Geography, History, Business Studies, and Life Orientation, among others.",
+    matric: "Yes! Matric preparation is a central focus at Mary Ralake HS. We support Grade 12 learners with revision programmes, structured assessments, and dedicated teaching to help every learner succeed in the NSC examinations.",
+    curriculum: "We follow the National Senior Certificate (NSC) / CAPS curriculum, preparing learners for tertiary education, the world of work, and active citizenship.",
+  },
+  tieCeremony: {
+    what: "The Tie Ceremony is one of our most cherished traditions. Each year, at the start of the Matric year, we hold a formal ceremony to welcome the Grade 12 class and present them with their Matric ties. It's a moment of pride for learners, parents, and the whole community.",
+    matric2026: "The Matric 2026 tie is navy blue with an ink-splash design, embroidered with the school crest and 'MATRIC 2026'. It's a symbol of the commitment and pride of our Class of 2026.",
+  },
+  schoolHistory: {
+    former: "Yes — Mary Ralake High School was previously known as Maluti Junior Secondary School (Maluti JSS). The school was upgraded to a full high school and renamed Mary Ralake High School.",
+    location: "We're located in Maluti, Matatiele, in the Eastern Cape — within the Alfred Nzo West Education District.",
+  },
+  contact: {
+    how: "You can visit us in Maluti, Matatiele, Eastern Cape, 4730, or find us on Facebook: Mary Ralake high School. For specific contact details, please check with the school directly.",
+    where: "We're located in Maluti, Matatiele, in the Eastern Cape — within the Alfred Nzo West Education District.",
+  },
+  general: {
+    motto: "Our motto is 'Success Through Perseverance' — it's the principle that guides everything we do.",
+    colours: "Our school colours are royal blue, red, and white.",
+    photos: "Our official school photographer is EverLasting Portraits.",
+  },
+}
 
 const uid = () => `${Date.now()}-${Math.random().toString(16).slice(2)}`
 
-const QUICK = [
+const QUICK_QUESTIONS = [
   'How do I apply for admission?',
-  'What streams do you offer?',
-  'What documents do I need?',
-  'What are your school hours?',
+  'Is there a school fee?',
+  'What is the Tie Ceremony?',
+  'What subjects do you offer?',
 ]
 
-async function askClaude(userMsg: string) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      system: SYSTEM,
-      messages: [{ role: 'user', content: userMsg }],
-    }),
-  })
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  const data = await res.json()
-  return data.content?.filter((b: { type: string }) => b.type === 'text').map((b: { text: string }) => b.text).join('\n').trim() || ''
-}
-
-function parseStatusQuery(text: string) {
+function findResponse(text) {
   const t = text.toLowerCase()
-  const m = t.match(/(\d{4}-\d{6})/)
-  if (m) return m[1].toUpperCase()
-  return null
+  
+  // Greetings
+  if (t.match(/^(hi|hello|hey|good morning|good afternoon|good evening)/)) {
+    return CHATBOT_RESPONSES.greetings[0]
+  }
+  
+  // Admissions
+  if (t.includes('apply') || t.includes('admission')) {
+    if (t.includes('document')) return CHATBOT_RESPONSES.admissions.documents
+    if (t.includes('fee')) return CHATBOT_RESPONSES.admissions.fee
+    if (t.includes('grade')) return CHATBOT_RESPONSES.admissions.grades
+    return CHATBOT_RESPONSES.admissions.apply
+  }
+  
+  // Academics
+  if (t.includes('subject')) return CHATBOT_RESPONSES.academics.subjects
+  if (t.includes('matric') || t.includes('grade 12') || t.includes('examination')) return CHATBOT_RESPONSES.academics.matric
+  if (t.includes('curriculum') || t.includes('caps') || t.includes('nsc')) return CHATBOT_RESPONSES.academics.curriculum
+  
+  // Tie Ceremony
+  if (t.includes('tie ceremony') || t.includes('tie')) {
+    if (t.includes('2026') || t.includes('matric 2026')) return CHATBOT_RESPONSES.tieCeremony.matric2026
+    return CHATBOT_RESPONSES.tieCeremony.what
+  }
+  
+  // School History
+  if (t.includes('former') || t.includes('before') || t.includes('renamed') || t.includes('maluti jss')) {
+    return CHATBOT_RESPONSES.schoolHistory.former
+  }
+  
+  // Contact
+  if (t.includes('contact') || t.includes('phone') || t.includes('email')) {
+    if (t.includes('where') || t.includes('location') || t.includes('address')) return CHATBOT_RESPONSES.contact.where
+    return CHATBOT_RESPONSES.contact.how
+  }
+  
+  // General
+  if (t.includes('motto')) return CHATBOT_RESPONSES.general.motto
+  if (t.includes('colour') || t.includes('color')) return CHATBOT_RESPONSES.general.colours
+  if (t.includes('photo') || t.includes('photographer')) return CHATBOT_RESPONSES.general.photos
+  if (t.includes('where') || t.includes('location')) return CHATBOT_RESPONSES.schoolHistory.location
+  
+  // Fallback
+  return "That's a great question! For more details, please visit us in Maluti, Matatiele, or find us on Facebook: Mary Ralake high School."
 }
 
 export default function ChatbotWidget() {
   const [open, setOpen]       = useState(false)
   const [input, setInput]     = useState('')
-  const [busy, setBusy]       = useState(false)
   const [messages, setMessages] = useState([{
     id: uid(), role: 'bot',
-    text: "Hello! I'm the Colana SSS assistant. Ask me anything about admissions, streams, or school life!",
+    text: CHATBOT_RESPONSES.greetings[0],
   }])
   const endRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -64,30 +106,19 @@ export default function ChatbotWidget() {
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages])
   useEffect(() => { if (open) setTimeout(() => inputRef.current?.focus(), 150) }, [open])
 
-  const addMsg = (role: string, text: string) => setMessages(p => [...p, { id: uid(), role, text }])
+  const addMsg = (role, text) => setMessages(p => [...p, { id: uid(), role, text }])
 
-  const send = async (override?: string) => {
+  const send = (override) => {
     const text = (override ?? input).trim()
-    if (!text || busy) return
+    if (!text) return
     addMsg('user', text)
     setInput('')
-    setBusy(true)
-    try {
-      const sn = parseStatusQuery(text)
-      if (sn) {
-        const app = getApplications().find((a: { studentNumber?: string }) => a.studentNumber?.toUpperCase() === sn)
-        addMsg('bot', app
-          ? `I found the application for ${app.firstName} ${app.lastName} (${sn}). Status: **${app.status}**. Submitted: ${app.submittedDate}.`
-          : `I couldn't find an application with student number ${sn}. Please double-check the number or contact the school office.`)
-        return
-      }
-      const reply = await askClaude(text)
-      addMsg('bot', reply)
-    } catch {
-      addMsg('bot', 'I\'m having trouble connecting right now. Please contact the school directly at 078 671 7415.')
-    } finally {
-      setBusy(false)
-    }
+    
+    // Simulate typing delay
+    setTimeout(() => {
+      const response = findResponse(text)
+      addMsg('bot', response)
+    }, 500)
   }
 
   return (
@@ -99,73 +130,61 @@ export default function ChatbotWidget() {
             height: 'min(560px, 72vh)',
             background: '#fff',
             borderRadius: '1.25rem',
-            boxShadow: '0 24px 64px rgba(107,45,21,0.18)',
-            border: '1px solid rgba(218,165,32,0.2)',
+            boxShadow: '0 24px 64px rgba(26,58,143,0.18)',
+            border: '1px solid rgba(26,58,143,0.2)',
             overflow: 'hidden',
           }}>
 
           <div className="flex items-center justify-between px-4 py-3 shrink-0"
-            style={{ background: '#6B2D15', borderBottom: '3px solid #DAA520' }}>
+            style={{ background: '#1A3A8F', borderBottom: '3px solid #CC1A2A' }}>
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: '#DAA520' }}>
-                <Sparkles size={15} style={{ color: '#6B2D15' }} />
+              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: '#FFFFFF' }}>
+                <GraduationCap size={15} style={{ color: '#1A3A8F' }} />
               </div>
               <div>
-                <p className="text-sm font-bold leading-tight" style={{ color: '#DAA520' }}>Colana Assistant</p>
-                <p className="text-xs flex items-center gap-1" style={{ color: 'rgba(218,165,32,0.6)' }}>
+                <p className="text-sm font-bold leading-tight" style={{ color: '#FFFFFF' }}>Ask Mary Ralake</p>
+                <p className="text-xs flex items-center gap-1" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-green-400 inline-block" />
-                  Online
+                  Your school assistant
                 </p>
               </div>
             </div>
             <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg transition-colors"
-              style={{ color: '#DAA520' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(218,165,32,0.15)' }}
+              style={{ color: '#FFFFFF' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.15)' }}
               onMouseLeave={e => { e.currentTarget.style.background = '' }}>
               <X size={18} />
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-3" style={{ background: '#FEFBF0' }}>
+          <div className="flex-1 overflow-y-auto p-4 space-y-3" style={{ background: '#F5F8FF' }}>
             {messages.map(m => (
               <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className="max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed"
                   style={m.role === 'user'
-                    ? { background: '#6B2D15', color: '#FFD966' }
-                    : { background: '#fff', color: '#374151', border: '1px solid rgba(218,165,32,0.15)' }
+                    ? { background: '#1A3A8F', color: '#FFFFFF' }
+                    : { background: '#FFFFFF', color: '#374151', border: '1px solid rgba(26,58,143,0.15)' }
                   }>
                   {m.text}
                 </div>
               </div>
             ))}
-            {busy && (
-              <div className="flex justify-start">
-                <div className="rounded-2xl px-4 py-3 text-sm"
-                  style={{ background: '#fff', border: '1px solid rgba(218,165,32,0.15)' }}>
-                  <span className="flex gap-1">
-                    <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: '#DAA520', animationDelay: '0ms' }} />
-                    <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: '#DAA520', animationDelay: '150ms' }} />
-                    <span className="w-2 h-2 rounded-full animate-bounce" style={{ background: '#DAA520', animationDelay: '300ms' }} />
-                  </span>
-                </div>
-              </div>
-            )}
             <div ref={endRef} />
           </div>
 
           {messages.length === 1 && (
             <div className="px-4 pb-2 flex flex-wrap gap-1.5">
-              {QUICK.map(q => (
+              {QUICK_QUESTIONS.map(q => (
                 <button key={q} onClick={() => send(q)}
                   className="text-xs px-3 py-1.5 rounded-full transition-colors"
-                  style={{ background: 'rgba(218,165,32,0.1)', color: '#6B2D15', border: '1px solid rgba(218,165,32,0.2)' }}>
+                  style={{ background: 'rgba(26,58,143,0.1)', color: '#1A3A8F', border: '1px solid rgba(26,58,143,0.2)' }}>
                   {q}
                 </button>
               ))}
             </div>
           )}
 
-          <div className="flex items-center gap-2 px-3 py-3 shrink-0" style={{ borderTop: '1px solid rgba(218,165,32,0.12)' }}>
+          <div className="flex items-center gap-2 px-3 py-3 shrink-0" style={{ borderTop: '1px solid rgba(26,58,143,0.12)' }}>
             <input
               ref={inputRef}
               value={input}
@@ -173,12 +192,12 @@ export default function ChatbotWidget() {
               onKeyDown={e => e.key === 'Enter' && send()}
               placeholder="Ask a question..."
               className="flex-1 text-sm px-3 py-2 rounded-xl border outline-none"
-              style={{ borderColor: 'rgba(218,165,32,0.2)' }}
+              style={{ borderColor: 'rgba(26,58,143,0.2)' }}
             />
             <button onClick={() => send()}
               className="w-9 h-9 rounded-xl flex items-center justify-center transition-colors"
-              style={{ background: '#DAA520', color: '#6B2D15' }}
-              disabled={busy || !input.trim()}>
+              style={{ background: '#1A3A8F', color: '#FFFFFF' }}
+              disabled={!input.trim()}>
               <Send size={16} />
             </button>
           </div>
@@ -188,7 +207,7 @@ export default function ChatbotWidget() {
       <button
         onClick={() => setOpen(v => !v)}
         className="fixed z-50 bottom-4 right-3 sm:right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105"
-        style={{ background: '#DAA520', color: '#6B2D15' }}
+        style={{ background: '#1A3A8F', color: '#FFFFFF' }}
         aria-label="Chat">
         {open ? <X size={22} /> : <MessageCircle size={22} />}
       </button>

@@ -1,82 +1,65 @@
 import { Link } from 'react-router-dom'
-import { Phone, Mail, MapPin, Clock, Facebook } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook } from 'lucide-react'
 import { SCHOOL } from '../lib/store'
-
-const TikTok = ({ size = 18 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.372V2h-3.58v13.2a2.988 2.988 0 1 1-4.337-2.657V8.69a6.57 6.57 0 1 0 4.337 6.51V9.207a8.318 8.318 0 0 0 3.77.92V6.686Z" />
-  </svg>
-)
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#4A1E0D', borderTop: '4px solid #DAA520' }}>
+    <footer style={{ background: '#102060', borderTop: '4px solid #1A3A8F' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
 
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-3">
-              <img
-                src="/assets/logo.png"
-                alt="Colana SSS Logo"
-                className="w-14 h-14 rounded-lg object-contain shrink-0"
-              />
+              <div
+                className="w-14 h-14 rounded-lg flex items-center justify-center shrink-0"
+                style={{ background: '#1A3A8F' }}
+              >
+                <span className="text-white font-bold text-sm">MRHS</span>
+              </div>
               <div>
-                <p className="font-display text-xl font-bold leading-tight" style={{ color: '#DAA520' }}>
-                  Colana SSS
+                <p className="font-display text-xl font-bold leading-tight" style={{ color: '#FFFFFF' }}>
+                  Mary Ralake HS
                 </p>
-                <p className="text-xs italic leading-tight mt-0.5" style={{ color: 'rgba(218,165,32,0.55)' }}>
+                <p className="text-xs italic leading-tight mt-0.5" style={{ color: 'rgba(255,255,255,0.55)' }}>
                   {SCHOOL.motto}
                 </p>
               </div>
             </div>
             <div className="flex gap-3">
               <a
-                href={SCHOOL.facebook}
+                href="https://www.facebook.com/profile.php?id=61572826877060"
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
-                style={{ background: 'rgba(218,165,32,0.12)', color: '#DAA520' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#DAA520'; e.currentTarget.style.color = '#6B2D15' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(218,165,32,0.12)'; e.currentTarget.style.color = '#DAA520' }}
+                style={{ background: 'rgba(255,255,255,0.1)', color: '#CC1A2A' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#CC1A2A'; e.currentTarget.style.color = '#FFFFFF' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#CC1A2A' }}
                 aria-label="Facebook"
               >
                 <Facebook size={18} />
-              </a>
-              <a
-                href={SCHOOL.tiktok}
-                target="_blank"
-                rel="noreferrer"
-                className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
-                style={{ background: 'rgba(218,165,32,0.12)', color: '#DAA520' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#DAA520'; e.currentTarget.style.color = '#6B2D15' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(218,165,32,0.12)'; e.currentTarget.style.color = '#DAA520' }}
-                aria-label="TikTok"
-              >
-                <TikTok />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#DAA520', borderBottom: '1px solid rgba(218,165,32,0.2)', paddingBottom: '0.5rem' }}>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#CC1A2A', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>
               Quick Links
             </h4>
-            <ul className="space-y-2 text-sm" style={{ color: 'rgba(218,165,32,0.7)' }}>
+            <ul className="space-y-2 text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
               {[
-                ['About Us',      '/about'],
-                ['Achievements',  '/achievements'],
-                ['Staff',         '/staff'],
-                ['Admissions',    '/admissions'],
-                ['Documents',     '/documents'],
-                ['Contact',       '/contact'],
+                ['Home',         '/'],
+                ['About',        '/about'],
+                ['Academics',    '/academics'],
+                ['Admissions',   '/admissions'],
+                ['Gallery',      '/gallery'],
+                ['Contact',      '/contact'],
               ].map(([label, to]) => (
                 <li key={to}>
-                  <Link to={to} className="hover:text-amber-300 transition-colors"
-                    style={{ color: 'rgba(218,165,32,0.7)' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#FFD966' }}
-                    onMouseLeave={e => { e.currentTarget.style.color = 'rgba(218,165,32,0.7)' }}
+                  <Link to={to} className="hover:text-[#CC1A2A] transition-colors"
+                    style={{ color: 'rgba(255,255,255,0.7)' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#CC1A2A' }}
+                    onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)' }}
                   >
                     {label}
                   </Link>
@@ -86,10 +69,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#DAA520', borderBottom: '1px solid rgba(218,165,32,0.2)', paddingBottom: '0.5rem' }}>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#CC1A2A', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>
               Contact
             </h4>
-            <ul className="space-y-3 text-sm" style={{ color: 'rgba(218,165,32,0.7)' }}>
+            <ul className="space-y-3 text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
               <li className="flex items-start gap-2">
                 <MapPin size={15} className="mt-0.5 shrink-0" />
                 <span>{SCHOOL.address}</span>
@@ -99,17 +82,17 @@ export default function Footer() {
                 <span>{SCHOOL.phone}</span>
               </li>
               <li className="flex items-center gap-2">
-                <Mail size={15} className="shrink-0" />
-                <span className="break-all">{SCHOOL.email}</span>
+                <span style={{ width: 15 }}></span>
+                <span className="break-all">Facebook: {SCHOOL.facebook}</span>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#DAA520', borderBottom: '1px solid rgba(218,165,32,0.2)', paddingBottom: '0.5rem' }}>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: '#CC1A2A', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>
               School Hours
             </h4>
-            <ul className="space-y-2 text-sm" style={{ color: 'rgba(218,165,32,0.7)' }}>
+            <ul className="space-y-2 text-sm" style={{ color: 'rgba(255,255,255,0.7)' }}>
               <li className="flex justify-between gap-4"><span>Mon – Thu</span><span className="font-medium">{SCHOOL.hoursWeek}</span></li>
               <li className="flex justify-between gap-4"><span>Friday</span><span className="font-medium">{SCHOOL.hoursFri}</span></li>
               <li className="flex justify-between gap-4"><span>Sat – Sun</span><span className="font-medium">Closed</span></li>
@@ -118,11 +101,9 @@ export default function Footer() {
 
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs" style={{ borderTop: '1px solid rgba(218,165,32,0.12)', color: 'rgba(218,165,32,0.4)' }}>
-          <p>&copy; {new Date().getFullYear()} Colana Senior Secondary School. All rights reserved.</p>
-          <Link to="/admin/login" style={{ color: 'rgba(218,165,32,0.25)' }} className="hover:opacity-60 transition-opacity">
-            Staff Portal
-          </Link>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.4)' }}>
+          <p>&copy; {new Date().getFullYear()} Mary Ralake High School. All Rights Reserved.</p>
+          <p>Alfred Nzo West Education District, Eastern Cape</p>
         </div>
 
       </div>

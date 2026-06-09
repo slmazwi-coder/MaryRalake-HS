@@ -30,7 +30,7 @@ export const StudentLogin = () => {
       return;
     }
 
-    sessionStorage.setItem('colana_student_portal_student_number', sn);
+    sessionStorage.setItem('mary-ralake_student_portal_student_number', sn);
     navigate('/student');
   };
 
@@ -47,11 +47,11 @@ export const StudentLogin = () => {
         </button>
 
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-[#DAA520] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-[#CC1A2A] rounded-full flex items-center justify-center mx-auto mb-4">
             <Lock className="text-white" size={28} />
           </div>
           <h1 className="text-2xl font-bold text-white">Student Portal</h1>
-          <p className="text-gray-400 text-sm mt-1">Colana SSS</p>
+          <p className="text-gray-400 text-sm mt-1">Mary Ralake HS SSS</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -63,7 +63,7 @@ export const StudentLogin = () => {
                 setStudentNumber(e.target.value);
                 setError('');
               }}
-              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#DAA520] focus:border-transparent"
+              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#CC1A2A] focus:border-transparent"
               placeholder="e.g. 2027-000123"
               autoFocus
             />
@@ -79,7 +79,7 @@ export const StudentLogin = () => {
                   setIdNumber(e.target.value);
                   setError('');
                 }}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#DAA520] focus:border-transparent"
+                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#CC1A2A] focus:border-transparent"
                 placeholder="Enter your ID number"
               />
               <button
@@ -97,7 +97,7 @@ export const StudentLogin = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#DAA520] text-white py-3 rounded-xl font-bold hover:bg-[#B8860B] transition-colors"
+            className="w-full bg-[#CC1A2A] text-white py-3 rounded-xl font-bold hover:bg-[#102060] transition-colors"
           >
             Sign In
           </button>
